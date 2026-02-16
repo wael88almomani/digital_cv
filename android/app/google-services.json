@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "66446842106",
+    "project_id": "digital-cv-e2a5c",
+    "storage_bucket": "digital-cv-e2a5c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66446842106:android:038e6c11b9a1a2509dd143",
+        "android_client_info": {
+          "package_name": "com.example.digital_cv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66446842106-vsusca5626q3ui4j381bq0jspk4bdbmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.digital_cv",
+            "certificate_hash": "0318b6d05b1a642ba4309c7f1d032c561639fa1b"
+          }
+        },
+        {
+          "client_id": "66446842106-qai990hcenl4immq03eh0p9u9isk2m4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDksA9WjK7f_N2iuyTqOd-kjVvV1RMd-3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66446842106-qai990hcenl4immq03eh0p9u9isk2m4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
