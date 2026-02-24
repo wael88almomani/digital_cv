@@ -64,3 +64,9 @@ Digital CV is a Flutter application that allows users to create and manage profe
 
 
 This app was developed to make building a professional, Arabic-friendly CV easy for everyone.
+
+## Developer
+
+- **Name:** Wael Almomani
+- **Email:** wael88almomani@gmail.com
+- **GitHub:** [wael88almomani](https://github.com/wael88almomani)
