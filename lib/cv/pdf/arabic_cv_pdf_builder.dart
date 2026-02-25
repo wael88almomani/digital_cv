@@ -32,31 +32,43 @@ class ArabicCvPdfBuilder {
     final imageProvider = await _loadImage(imagePath);
 
     doc.addPage(
-      pw.Page(
+      pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         margin: pw.EdgeInsets.zero,
         textDirection: pw.TextDirection.rtl,
         build: (context) {
-          return pw.Row(
-            crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-            children: [
-              // Right side - Main content (white background)
-              _buildMainContent(
-                user: user,
-                fontBold: arabicBold,
-                fontRegular: arabicRegular,
-                labels: labels,
-              ),
-              // Left side - Sidebar (grey background)
-              _buildSidebar(
-                user: user,
-                imageProvider: imageProvider,
-                fontBold: arabicBold,
-                fontRegular: arabicRegular,
-                labels: labels,
-              ),
-            ],
-          );
+          return [
+            pw.Partitions(
+              children: [
+                pw.Partition(
+                  child: pw.Column(
+                    children: [
+                      _buildMainContent(
+                        user: user,
+                        fontBold: arabicBold,
+                        fontRegular: arabicRegular,
+                        labels: labels,
+                      ),
+                    ],
+                  ),
+                ),
+                pw.Partition(
+                  width: 220,
+                  child: pw.Column(
+                    children: [
+                      _buildSidebar(
+                        user: user,
+                        imageProvider: imageProvider,
+                        fontBold: arabicBold,
+                        fontRegular: arabicRegular,
+                        labels: labels,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ];
         },
       ),
     );
@@ -186,7 +198,6 @@ class ArabicCvPdfBuilder {
           _sidebarSection(title: labels.hobbies, fontBold: fontBold),
           pw.SizedBox(height: 10),
           ...(user.references.isNotEmpty ? user.references : _defaultHobbies())
-              .take(6)
               .map(
                 (item) => pw.Padding(
                   padding: const pw.EdgeInsets.only(bottom: 6),
@@ -310,110 +321,90 @@ class ArabicCvPdfBuilder {
     required pw.Font fontRegular,
     required ArabicCvLabels labels,
   }) {
-    return pw.Expanded(
-      child: pw.Column(
-        children: [
-          // Blue header with name and job title
-          pw.Container(
-            width: double.infinity,
-            color: _headerColor,
-            padding: const pw.EdgeInsets.symmetric(
-              vertical: 25,
-              horizontal: 20,
-            ),
-            child: pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.end,
-              children: [
-                pw.Text(
-                  user.name.isEmpty ? 'اسمك الكامل' : user.name,
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
-                  style: pw.TextStyle(
-                    font: fontBold,
-                    fontSize: 28,
-                    color: _whiteColor,
-                  ),
+    return pw.Column(
+      children: [
+        // Blue header with name and job title
+        pw.Container(
+          width: double.infinity,
+          color: _headerColor,
+          padding: const pw.EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Text(
+                user.name.isEmpty ? 'اسمك الكامل' : user.name,
+                textAlign: pw.TextAlign.right,
+                textDirection: pw.TextDirection.rtl,
+                style: pw.TextStyle(
+                  font: fontBold,
+                  fontSize: 28,
+                  color: _whiteColor,
                 ),
-                pw.SizedBox(height: 6),
-                pw.Text(
-                  user.jobTitle.isEmpty ? 'المسمى الوظيفي' : user.jobTitle,
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
-                  style: pw.TextStyle(
-                    font: fontRegular,
-                    fontSize: 14,
-                    color: _whiteColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // White content area
-          pw.Expanded(
-            child: pw.Container(
-              color: _whiteColor,
-              padding: const pw.EdgeInsets.all(20),
-              child: pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.end,
-                children: [
-                  // Education Section
-                  _mainSection(title: labels.education, fontBold: fontBold),
-                  pw.SizedBox(height: 10),
-                  ...user.education
-                      .take(3)
-                      .map(
-                        (edu) =>
-                            _bulletItem(text: edu, fontRegular: fontRegular),
-                      ),
-                  pw.SizedBox(height: 20),
-
-                  // Work Experience Section
-                  _mainSection(
-                    title: labels.workExperience,
-                    fontBold: fontBold,
-                  ),
-                  pw.SizedBox(height: 10),
-                  ...user.experience
-                      .take(4)
-                      .map(
-                        (exp) =>
-                            _bulletItem(text: exp, fontRegular: fontRegular),
-                      ),
-                  pw.SizedBox(height: 20),
-
-                  // Training Courses Section
-                  _mainSection(title: labels.courses, fontBold: fontBold),
-                  pw.SizedBox(height: 10),
-                  ...user.courses
-                      .take(6)
-                      .map(
-                        (course) => _bulletItem(
-                          text: course,
-                          fontRegular: fontRegular,
-                          small: true,
-                        ),
-                      ),
-                  pw.SizedBox(height: 20),
-
-                  // Achievements Section
-                  _mainSection(title: labels.achievements, fontBold: fontBold),
-                  pw.SizedBox(height: 10),
-                  ...user.awards
-                      .take(6)
-                      .map(
-                        (award) => _bulletItem(
-                          text: award,
-                          fontRegular: fontRegular,
-                          small: true,
-                        ),
-                      ),
-                ],
               ),
-            ),
+              pw.SizedBox(height: 6),
+              pw.Text(
+                user.jobTitle.isEmpty ? 'المسمى الوظيفي' : user.jobTitle,
+                textAlign: pw.TextAlign.right,
+                textDirection: pw.TextDirection.rtl,
+                style: pw.TextStyle(
+                  font: fontRegular,
+                  fontSize: 14,
+                  color: _whiteColor,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+
+        // White content area
+        pw.Container(
+          color: _whiteColor,
+          padding: const pw.EdgeInsets.all(20),
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              // Education Section
+              _mainSection(title: labels.education, fontBold: fontBold),
+              pw.SizedBox(height: 10),
+              ...user.education.map(
+                (edu) => _bulletItem(text: edu, fontRegular: fontRegular),
+              ),
+              pw.SizedBox(height: 20),
+
+              // Work Experience Section
+              _mainSection(title: labels.workExperience, fontBold: fontBold),
+              pw.SizedBox(height: 10),
+              ...user.experience.map(
+                (exp) => _bulletItem(text: exp, fontRegular: fontRegular),
+              ),
+              pw.SizedBox(height: 20),
+
+              // Training Courses Section
+              _mainSection(title: labels.courses, fontBold: fontBold),
+              pw.SizedBox(height: 10),
+              ...user.courses.map(
+                (course) => _bulletItem(
+                  text: course,
+                  fontRegular: fontRegular,
+                  small: true,
+                ),
+              ),
+              pw.SizedBox(height: 20),
+
+              // Achievements Section
+              _mainSection(title: labels.achievements, fontBold: fontBold),
+              pw.SizedBox(height: 10),
+              ...user.awards.map(
+                (award) => _bulletItem(
+                  text: award,
+                  fontRegular: fontRegular,
+                  small: true,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

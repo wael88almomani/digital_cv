@@ -204,29 +204,155 @@ class CvDocument {
     CvLanguage cvLanguage = CvLanguage.arabic,
   }) {
     final now = DateTime.now();
+    final isArabic = cvLanguage == CvLanguage.arabic;
+    final resolvedTitle = title.isNotEmpty
+        ? title
+        : (isArabic ? 'سيرتي الذاتية' : 'My Professional CV');
     return CvDocument(
       id: '',
       userId: userId,
-      title: title,
+      title: resolvedTitle,
       isActive: isActive,
       createdAt: now,
       updatedAt: now,
       name: userName,
       email: userEmail,
-      phone: '',
-      locations: const [],
-      jobTitle: '',
+      phone: isArabic ? '079 123 4567' : '+962 79 123 4567',
+      locations: isArabic
+          ? const [
+              'عمّان - الأردن',
+              'الزرقاء - الأردن',
+              'إربد - الأردن',
+              'العقبة - الأردن',
+              'السلط - الأردن',
+            ]
+          : const [
+              'Amman, Jordan',
+              'Zarqa, Jordan',
+              'Irbid, Jordan',
+              'Aqaba, Jordan',
+              'Salt, Jordan',
+            ],
+      jobTitle: isArabic ? 'مطور تطبيقات Flutter' : 'Flutter App Developer',
       cvType: 'professional',
       selectedTemplate: 'modern',
-      about: '',
-      skills: const [],
-      certifications: const [],
-      courses: const [],
-      awards: const [],
-      references: const [],
-      experience: const [],
-      education: const [],
-      languages: const [],
+      about: isArabic
+          ? 'مطور Flutter بخبرة في بناء تطبيقات موبايل عالية الجودة، والتركيز على الأداء وتجربة المستخدم.'
+          : 'Flutter developer with experience building high-quality mobile apps, focused on performance and user experience.',
+      skills: isArabic
+          ? const [
+              'Flutter',
+              'Dart',
+              'Firebase',
+              'REST APIs',
+              'Git',
+              'Clean Architecture',
+              'State Management (Provider)',
+              'UI/UX Basics',
+              'Riverpod',
+              'CI/CD Basics',
+              'Unit Testing',
+              'Figma Handoff',
+            ]
+          : const [
+              'Flutter',
+              'Dart',
+              'Firebase',
+              'REST APIs',
+              'Git',
+              'Clean Architecture',
+              'State Management (Provider)',
+              'UI/UX Basics',
+              'Riverpod',
+              'CI/CD Basics',
+              'Unit Testing',
+              'Figma Handoff',
+            ],
+      certifications: isArabic
+          ? const [
+              'Google Flutter Developer (أساسي)',
+              'مبادئ هندسة البرمجيات',
+              'أساسيات أمن التطبيقات',
+            ]
+          : const [
+              'Google Flutter Developer (Foundation)',
+              'Software Engineering Fundamentals',
+              'Application Security Basics',
+            ],
+      courses: isArabic
+          ? const [
+              'معسكر تطوير تطبيقات Flutter',
+              'دورة تصميم قواعد البيانات',
+              'أساسيات واجهات المستخدم',
+              'بناء واجهات متجاوبة',
+              'إدارة الحالة المتقدمة',
+            ]
+          : const [
+              'Flutter Mobile Development Bootcamp',
+              'Database Design Fundamentals',
+              'UI Fundamentals',
+              'Responsive UI Layouts',
+              'Advanced State Management',
+            ],
+      awards: isArabic
+          ? const [
+              'أفضل مشروع تخرج',
+              'مركز أول في هاكاثون جامعي',
+              'شهادة تميز أكاديمي',
+            ]
+          : const [
+              'Best Graduation Project',
+              '1st Place in University Hackathon',
+              'Academic Excellence Award',
+            ],
+      references: isArabic
+          ? const [
+              'متاحة عند الطلب',
+              'م. أحمد خالد - مدير تقني',
+              'م. سارة عادل - مديرة مشروع',
+            ]
+          : const [
+              'Available upon request',
+              'Eng. Ahmad Khaled - Tech Lead',
+              'Ms. Sara Adel - Project Manager',
+            ],
+      experience: isArabic
+          ? const [
+              'مطوّر Flutter | شركة تقنية ناشئة | 2023 - الآن',
+              'مطور تطبيقات موبايل (متدرب) | 2022 - 2023',
+              'مشاريع حرّة | تطوير تطبيقات أعمال صغيرة | 2021 - 2022',
+              'تطوير تطبيق حجوزات | عقد مستقل | 2021',
+            ]
+          : const [
+              'Flutter Developer | Startup Tech Company | 2023 - Present',
+              'Mobile Developer Intern | 2022 - 2023',
+              'Freelance Projects | Small Business Apps | 2021 - 2022',
+              'Booking App Development | Contract | 2021',
+            ],
+      education: isArabic
+          ? const [
+              'بكالوريوس علوم الحاسوب | جامعة اليرموك | 2019 - 2023',
+              'دبلوم تطوير تطبيقات موبايل | 2018 - 2019',
+              'دورات تخصصية في Flutter وFirebase | 2020',
+            ]
+          : const [
+              'B.Sc. Computer Science | Yarmouk University | 2019 - 2023',
+              'Diploma in Mobile App Development | 2018 - 2019',
+              'Specialized Courses in Flutter & Firebase | 2020',
+            ],
+      languages: isArabic
+          ? const [
+              'العربية (لغة أم)',
+              'الإنجليزية (جيد جداً)',
+              'الفرنسية (أساسي)',
+              'التركية (مبتدئ)',
+            ]
+          : const [
+              'Arabic (Native)',
+              'English (Very Good)',
+              'French (Basic)',
+              'Turkish (Beginner)',
+            ],
       theme: 'dark',
       cvLanguage: cvLanguage,
     );

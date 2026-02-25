@@ -32,59 +32,84 @@ class CvPdfBuilder {
     final imageProvider = await _loadImage(imagePath);
 
     doc.addPage(
-      pw.Page(
+      pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         margin: pw.EdgeInsets.zero,
         build: (context) {
-          return pw.Directionality(
-            textDirection: isRtl ? pw.TextDirection.rtl : pw.TextDirection.ltr,
-            child: pw.Row(
-              crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-              children: isRtl
-                  ? [
-                      // RTL: Right side (blue sidebar)
-                      _buildSidebar(
-                        user: user,
-                        imageProvider: imageProvider,
-                        fontBold: fontBold,
-                        fontRegular: fontRegular,
-                        fallbackFonts: fallbackFonts,
-                        labels: labels,
-                        isRtl: isRtl,
-                      ),
-                      // RTL: Left side (white content)
-                      _buildMainContent(
-                        user: user,
-                        fontBold: fontBold,
-                        fontRegular: fontRegular,
-                        fallbackFonts: fallbackFonts,
-                        labels: labels,
-                        isRtl: isRtl,
-                      ),
-                    ]
-                  : [
-                      // LTR: Left side (blue sidebar)
-                      _buildSidebar(
-                        user: user,
-                        imageProvider: imageProvider,
-                        fontBold: fontBold,
-                        fontRegular: fontRegular,
-                        fallbackFonts: fallbackFonts,
-                        labels: labels,
-                        isRtl: isRtl,
-                      ),
-                      // LTR: Right side (white content)
-                      _buildMainContent(
-                        user: user,
-                        fontBold: fontBold,
-                        fontRegular: fontRegular,
-                        fallbackFonts: fallbackFonts,
-                        labels: labels,
-                        isRtl: isRtl,
-                      ),
-                    ],
+          return [
+            pw.Directionality(
+              textDirection: isRtl
+                  ? pw.TextDirection.rtl
+                  : pw.TextDirection.ltr,
+              child: pw.Partitions(
+                children: isRtl
+                    ? [
+                        pw.Partition(
+                          width: 200,
+                          child: pw.Column(
+                            children: [
+                              _buildSidebar(
+                                user: user,
+                                imageProvider: imageProvider,
+                                fontBold: fontBold,
+                                fontRegular: fontRegular,
+                                fallbackFonts: fallbackFonts,
+                                labels: labels,
+                                isRtl: isRtl,
+                              ),
+                            ],
+                          ),
+                        ),
+                        pw.Partition(
+                          child: pw.Column(
+                            children: [
+                              _buildMainContent(
+                                user: user,
+                                fontBold: fontBold,
+                                fontRegular: fontRegular,
+                                fallbackFonts: fallbackFonts,
+                                labels: labels,
+                                isRtl: isRtl,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]
+                    : [
+                        pw.Partition(
+                          width: 200,
+                          child: pw.Column(
+                            children: [
+                              _buildSidebar(
+                                user: user,
+                                imageProvider: imageProvider,
+                                fontBold: fontBold,
+                                fontRegular: fontRegular,
+                                fallbackFonts: fallbackFonts,
+                                labels: labels,
+                                isRtl: isRtl,
+                              ),
+                            ],
+                          ),
+                        ),
+                        pw.Partition(
+                          child: pw.Column(
+                            children: [
+                              _buildMainContent(
+                                user: user,
+                                fontBold: fontBold,
+                                fontRegular: fontRegular,
+                                fallbackFonts: fallbackFonts,
+                                labels: labels,
+                                isRtl: isRtl,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+              ),
             ),
-          );
+          ];
         },
       ),
     );
@@ -351,169 +376,159 @@ class CvPdfBuilder {
         ? labels.jobPlaceholder
         : user.jobTitle;
 
-    return pw.Expanded(
-      child: pw.Container(
-        color: _whiteColor,
-        padding: const pw.EdgeInsets.all(25),
-        child: pw.Column(
-          crossAxisAlignment: isRtl
-              ? pw.CrossAxisAlignment.end
-              : pw.CrossAxisAlignment.start,
-          children: [
-            // Summary Section
-            _mainSectionTitle(
-              title: labels.summary,
-              fontBold: fontBold,
-              fallbackFonts: fallbackFonts,
-              isRtl: isRtl,
+    return pw.Container(
+      color: _whiteColor,
+      padding: const pw.EdgeInsets.all(25),
+      child: pw.Column(
+        crossAxisAlignment: isRtl
+            ? pw.CrossAxisAlignment.end
+            : pw.CrossAxisAlignment.start,
+        children: [
+          // Summary Section
+          _mainSectionTitle(
+            title: labels.summary,
+            fontBold: fontBold,
+            fallbackFonts: fallbackFonts,
+            isRtl: isRtl,
+          ),
+          pw.SizedBox(height: 8),
+          pw.Text(
+            user.about.isEmpty
+                ? 'Describe in a few lines your career path, your key skills for the position and your career goals.'
+                : user.about,
+            textAlign: isRtl ? pw.TextAlign.right : pw.TextAlign.left,
+            style: pw.TextStyle(
+              font: fontRegular,
+              fontFallback: fallbackFonts,
+              fontSize: 9,
+              color: _textGrey,
+              lineSpacing: 3,
             ),
-            pw.SizedBox(height: 8),
-            pw.Text(
-              user.about.isEmpty
-                  ? 'Describe in a few lines your career path, your key skills for the position and your career goals.'
-                  : user.about,
-              textAlign: isRtl ? pw.TextAlign.right : pw.TextAlign.left,
-              style: pw.TextStyle(
-                font: fontRegular,
-                fontFallback: fallbackFonts,
-                fontSize: 9,
-                color: _textGrey,
-                lineSpacing: 3,
-              ),
-            ),
-            pw.SizedBox(height: 20),
+          ),
+          pw.SizedBox(height: 20),
 
-            // Experience Section
-            _mainSectionTitle(
-              title: labels.workExperience,
+          // Experience Section
+          _mainSectionTitle(
+            title: labels.workExperience,
+            fontBold: fontBold,
+            fallbackFonts: fallbackFonts,
+            isRtl: isRtl,
+          ),
+          pw.SizedBox(height: 8),
+          ...user.experience.map(
+            (exp) => _experienceItem(
+              title: jobValue,
+              description: exp,
               fontBold: fontBold,
-              fallbackFonts: fallbackFonts,
-              isRtl: isRtl,
-            ),
-            pw.SizedBox(height: 8),
-            ...user.experience
-                .take(3)
-                .map(
-                  (exp) => _experienceItem(
-                    title: jobValue,
-                    description: exp,
-                    fontBold: fontBold,
-                    fontRegular: fontRegular,
-                    fallbackFonts: fallbackFonts,
-                    isRtl: isRtl,
-                  ),
-                ),
-            pw.SizedBox(height: 15),
-
-            // Education Section
-            _mainSectionTitle(
-              title: labels.education,
-              fontBold: fontBold,
-              fallbackFonts: fallbackFonts,
-              isRtl: isRtl,
-            ),
-            pw.SizedBox(height: 8),
-            ...user.education
-                .take(2)
-                .map(
-                  (edu) => pw.Padding(
-                    padding: const pw.EdgeInsets.only(bottom: 8),
-                    child: pw.Row(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Container(
-                          width: 5,
-                          height: 5,
-                          margin: const pw.EdgeInsets.only(top: 4),
-                          decoration: const pw.BoxDecoration(
-                            color: _accentColor,
-                            shape: pw.BoxShape.circle,
-                          ),
-                        ),
-                        pw.SizedBox(width: 8),
-                        pw.Expanded(
-                          child: pw.Text(
-                            edu,
-                            textAlign: isRtl
-                                ? pw.TextAlign.right
-                                : pw.TextAlign.left,
-                            style: pw.TextStyle(
-                              font: fontRegular,
-                              fontFallback: fallbackFonts,
-                              fontSize: 9,
-                              color: _textDark,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-            pw.SizedBox(height: 15),
-
-            // Skills Section (Grid layout)
-            _mainSectionTitle(
-              title: labels.skills,
-              fontBold: fontBold,
-              fallbackFonts: fallbackFonts,
-              isRtl: isRtl,
-            ),
-            pw.SizedBox(height: 8),
-            _skillsGrid(
-              skills: user.skills,
               fontRegular: fontRegular,
               fallbackFonts: fallbackFonts,
+              isRtl: isRtl,
             ),
-            pw.SizedBox(height: 15),
+          ),
+          pw.SizedBox(height: 15),
 
-            // Courses Section
-            if (user.courses.isNotEmpty) ...[
-              _mainSectionTitle(
-                title: labels.courses,
-                fontBold: fontBold,
-                fallbackFonts: fallbackFonts,
-                isRtl: isRtl,
-              ),
-              pw.SizedBox(height: 8),
-              ...user.courses
-                  .take(3)
-                  .map(
-                    (course) => pw.Padding(
-                      padding: const pw.EdgeInsets.only(bottom: 4),
-                      child: pw.Row(
-                        crossAxisAlignment: pw.CrossAxisAlignment.start,
-                        children: [
-                          pw.Container(
-                            width: 5,
-                            height: 5,
-                            margin: const pw.EdgeInsets.only(top: 4),
-                            decoration: const pw.BoxDecoration(
-                              color: _accentColor,
-                              shape: pw.BoxShape.circle,
-                            ),
-                          ),
-                          pw.SizedBox(width: 8),
-                          pw.Expanded(
-                            child: pw.Text(
-                              course,
-                              textAlign: isRtl
-                                  ? pw.TextAlign.right
-                                  : pw.TextAlign.left,
-                              style: pw.TextStyle(
-                                font: fontRegular,
-                                fontFallback: fallbackFonts,
-                                fontSize: 9,
-                                color: _textGrey,
-                              ),
-                            ),
-                          ),
-                        ],
+          // Education Section
+          _mainSectionTitle(
+            title: labels.education,
+            fontBold: fontBold,
+            fallbackFonts: fallbackFonts,
+            isRtl: isRtl,
+          ),
+          pw.SizedBox(height: 8),
+          ...user.education.map(
+            (edu) => pw.Padding(
+              padding: const pw.EdgeInsets.only(bottom: 8),
+              child: pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Container(
+                    width: 5,
+                    height: 5,
+                    margin: const pw.EdgeInsets.only(top: 4),
+                    decoration: const pw.BoxDecoration(
+                      color: _accentColor,
+                      shape: pw.BoxShape.circle,
+                    ),
+                  ),
+                  pw.SizedBox(width: 8),
+                  pw.Expanded(
+                    child: pw.Text(
+                      edu,
+                      textAlign: isRtl ? pw.TextAlign.right : pw.TextAlign.left,
+                      style: pw.TextStyle(
+                        font: fontRegular,
+                        fontFallback: fallbackFonts,
+                        fontSize: 9,
+                        color: _textDark,
                       ),
                     ),
                   ),
-            ],
+                ],
+              ),
+            ),
+          ),
+          pw.SizedBox(height: 15),
+
+          // Skills Section (Grid layout)
+          _mainSectionTitle(
+            title: labels.skills,
+            fontBold: fontBold,
+            fallbackFonts: fallbackFonts,
+            isRtl: isRtl,
+          ),
+          pw.SizedBox(height: 8),
+          _skillsGrid(
+            skills: user.skills,
+            fontRegular: fontRegular,
+            fallbackFonts: fallbackFonts,
+          ),
+          pw.SizedBox(height: 15),
+
+          // Courses Section
+          if (user.courses.isNotEmpty) ...[
+            _mainSectionTitle(
+              title: labels.courses,
+              fontBold: fontBold,
+              fallbackFonts: fallbackFonts,
+              isRtl: isRtl,
+            ),
+            pw.SizedBox(height: 8),
+            ...user.courses.map(
+              (course) => pw.Padding(
+                padding: const pw.EdgeInsets.only(bottom: 4),
+                child: pw.Row(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Container(
+                      width: 5,
+                      height: 5,
+                      margin: const pw.EdgeInsets.only(top: 4),
+                      decoration: const pw.BoxDecoration(
+                        color: _accentColor,
+                        shape: pw.BoxShape.circle,
+                      ),
+                    ),
+                    pw.SizedBox(width: 8),
+                    pw.Expanded(
+                      child: pw.Text(
+                        course,
+                        textAlign: isRtl
+                            ? pw.TextAlign.right
+                            : pw.TextAlign.left,
+                        style: pw.TextStyle(
+                          font: fontRegular,
+                          fontFallback: fallbackFonts,
+                          fontSize: 9,
+                          color: _textGrey,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
-        ),
+        ],
       ),
     );
   }

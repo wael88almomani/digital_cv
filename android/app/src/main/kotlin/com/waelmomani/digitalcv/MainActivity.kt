@@ -1,4 +1,4 @@
-package com.example.digital_cv
+package com.waelmomani.digitalcv
 
 import io.flutter.embedding.android.FlutterActivity
 
