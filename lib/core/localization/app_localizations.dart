@@ -155,6 +155,15 @@ class AppLocalizations {
       'cantDeleteLastCv': 'Cannot delete the last CV. Create another CV first.',
       'tapToActivate': 'Tap to activate',
       'create': 'Create',
+      'deleteAccount': 'Delete Account',
+      'deleteAccountSubtitle': 'Permanently delete your account and all data',
+      'deleteAccountConfirmTitle': 'Delete Account?',
+      'deleteAccountConfirmBody':
+          'This will permanently delete your account, all CVs, and all associated data. This action cannot be undone.',
+      'deleteAccountConfirm': 'Delete Account',
+      'deleteAccountSuccess': 'Account deleted successfully.',
+      'deleteAccountFailed': 'Failed to delete account. Please sign in again and try.',
+      'dangerZone': 'Danger Zone',
     },
     'ar': {
       'welcomeBack': 'اهلا بعودتك',
@@ -285,6 +294,15 @@ class AppLocalizations {
       'cantDeleteLastCv': 'لا يمكن حذف السيرة الوحيدة. أنشئ سيرة أخرى أولاً.',
       'tapToActivate': 'اضغط للتفعيل',
       'create': 'إنشاء',
+      'deleteAccount': 'حذف الحساب',
+      'deleteAccountSubtitle': 'حذف حسابك وجميع بياناتك بشكل دائم',
+      'deleteAccountConfirmTitle': 'حذف الحساب؟',
+      'deleteAccountConfirmBody':
+          'سيتم حذف حسابك وجميع سيراتك الذاتية وبياناتك بشكل دائم. لا يمكن التراجع عن هذا الإجراء.',
+      'deleteAccountConfirm': 'حذف الحساب',
+      'deleteAccountSuccess': 'تم حذف الحساب بنجاح.',
+      'deleteAccountFailed': 'فشل حذف الحساب. سجّل الدخول مجدداً وحاول مرة أخرى.',
+      'dangerZone': 'منطقة الخطر',
     },
   };
 }

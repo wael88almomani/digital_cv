@@ -10,6 +10,51 @@ import '../core/widgets/gradient_background.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
+  Future<void> _confirmDeleteAccount(
+    BuildContext context,
+    AppLocalizations l,
+    AuthService auth,
+  ) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l.t('deleteAccountConfirmTitle')),
+        content: Text(l.t('deleteAccountConfirmBody')),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l.t('cancel')),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: Text(l.t('deleteAccountConfirm')),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true || !context.mounted) return;
+
+    try {
+      await auth.deleteAccount();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l.t('deleteAccountSuccess'))),
+        );
+      }
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l.t('deleteAccountFailed')),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
@@ -107,6 +152,50 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
+
+                // Danger Zone Section
+                AppCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.warning_amber_rounded,
+                              color: Colors.red, size: 18),
+                          const SizedBox(width: 6),
+                          Text(
+                            l.t('dangerZone'),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(color: Colors.red),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSizes.spacingSm),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: const Icon(Icons.delete_forever_outlined,
+                            color: Colors.red),
+                        title: Text(l.t('deleteAccount'),
+                            style: const TextStyle(color: Colors.red)),
+                        subtitle: Text(l.t('deleteAccountSubtitle'),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurface
+                                      .withValues(alpha: 0.6),
+                                )),
+                        onTap: () =>
+                            _confirmDeleteAccount(context, l, auth),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: AppSizes.spacing),
 
                 // Logout Button
                 SizedBox(
