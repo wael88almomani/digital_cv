@@ -123,9 +123,9 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         await auth.cancelAccountDeletion();
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l.t('cancelDeletionSuccess'))),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l.t('cancelDeletionSuccess'))));
         }
       } catch (_) {
         if (mounted) {

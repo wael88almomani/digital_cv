@@ -156,14 +156,15 @@ class AppLocalizations {
       'tapToActivate': 'Tap to activate',
       'create': 'Create',
       'deleteAccount': 'Delete Account',
-      'deleteAccountSubtitle': 'Schedule account deletion after a 90-day grace period',
+      'deleteAccountSubtitle':
+          'Schedule account deletion after a 90-day grace period',
       'deleteAccountConfirmTitle': 'Schedule Account Deletion?',
       'deleteAccountConfirmBody':
           'Your account will be permanently deleted after 90 days. You can cancel this at any time before then by signing back in.',
       'deleteAccountConfirm': 'Schedule Deletion',
-      'deleteAccountSuccess': 'Account scheduled for deletion in 90 days. You have been signed out.',
-      'deleteAccountFailed':
-          'Failed to schedule deletion. Please try again.',
+      'deleteAccountSuccess':
+          'Account scheduled for deletion in 90 days. You have been signed out.',
+      'deleteAccountFailed': 'Failed to schedule deletion. Please try again.',
       'dangerZone': 'Danger Zone',
       'pendingDeletionTitle': 'Account Scheduled for Deletion',
       'pendingDeletionBody':
@@ -308,9 +309,9 @@ class AppLocalizations {
       'deleteAccountConfirmBody':
           'سيتم حذف حسابك نهائياً بعد 90 يوماً. يمكنك إلغاء ذلك في أي وقت قبل انتهاء المهلة بتسجيل الدخول مجدداً.',
       'deleteAccountConfirm': 'جدولة الحذف',
-      'deleteAccountSuccess': 'تمت جدولة حذف الحساب بعد 90 يوماً. تم تسجيل خروجك.',
-      'deleteAccountFailed':
-          'فشل جدولة الحذف. حاول مرة أخرى.',
+      'deleteAccountSuccess':
+          'تمت جدولة حذف الحساب بعد 90 يوماً. تم تسجيل خروجك.',
+      'deleteAccountFailed': 'فشل جدولة الحذف. حاول مرة أخرى.',
       'dangerZone': 'منطقة الخطر',
       'pendingDeletionTitle': 'الحساب مجدوَل للحذف',
       'pendingDeletionBody':

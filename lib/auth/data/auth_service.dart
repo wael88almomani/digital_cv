@@ -76,15 +76,14 @@ class AuthService {
     final user = _auth.currentUser;
     if (user == null) return;
 
-    final deletionDate = DateTime.now().add(const Duration(days: _deletionGraceDays));
-
-    await _firestore.collection('users').doc(user.uid).set(
-      {
-        'scheduledDeletionAt': deletionDate.millisecondsSinceEpoch,
-        'deletionRequestedAt': DateTime.now().millisecondsSinceEpoch,
-      },
-      SetOptions(merge: true),
+    final deletionDate = DateTime.now().add(
+      const Duration(days: _deletionGraceDays),
     );
+
+    await _firestore.collection('users').doc(user.uid).set({
+      'scheduledDeletionAt': deletionDate.millisecondsSinceEpoch,
+      'deletionRequestedAt': DateTime.now().millisecondsSinceEpoch,
+    }, SetOptions(merge: true));
 
     await _googleSignIn.signOut();
     await _auth.signOut();
@@ -149,4 +148,3 @@ class AuthService {
     await _permanentlyDeleteAccount();
   }
 }
-
