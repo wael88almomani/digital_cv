@@ -375,13 +375,7 @@ users/
 
 ### Steps
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/wael88almomani/digital_cv.git
-   cd digital_cv
-   ```
-
-2. **Install Flutter dependencies**
+1. **Install Flutter dependencies**
    ```bash
    flutter pub get
    ```
