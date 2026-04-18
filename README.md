@@ -19,6 +19,7 @@
 - **Google Sign-In** and email/password authentication
 - Secure cloud sync via **Firebase Firestore**
 - **Privacy-first** — local data controlled by the user
+- **Delete account** — permanently remove account and all associated data
 
 ## App Screens
 
@@ -46,6 +47,11 @@
 - Preview the final design of your CV before exporting
 - Support for multiple templates (Modern/Classic)
 - Export PDF in both Arabic and English
+
+### 6. Settings Screen
+- View account information
+- Theme preferences
+- **Delete Account** — permanently deletes the account, all CVs, and all cloud data with a confirmation dialog
 
 ## How to Run
 
@@ -363,6 +369,13 @@ users/
 3. Choose template design
 4. Tap "Export to PDF"
 5. Save or share PDF
+
+### Deleting Your Account
+1. Go to **Settings** tab
+2. Scroll to the **Danger Zone** section
+3. Tap **Delete Account**
+4. Confirm the action in the dialog
+5. All CVs and account data will be permanently deleted from the cloud
 
 ---
 
