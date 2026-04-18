@@ -369,13 +369,7 @@ users/
 - Dart SDK
 - Android Studio or Xcode (for mobile development)
 
-### Installation Steps
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/wael88almomani/digital_cv.git
-   cd digital_cv
-   ```
 
 2. **Install Flutter dependencies**
    ```bash
@@ -446,10 +440,8 @@ users/
 
 ## Developer Information
 
-- **Name:** Wael Almomani
-- **Email:** wael88almomani@gmail.com
-- **GitHub:** [wael88almomani](https://github.com/wael88almomani)
-- **Portfolio:** [Digital CV](https://digital-cv.com)
+- **Name:** Next Horizon Intelligent Apps Studio
+- **Email:** harrpesadextonnes@gmail.com
 
 ---
 

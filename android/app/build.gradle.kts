@@ -12,7 +12,7 @@ plugins {
 }
 
 android {
-    namespace = "com.waelmomani.digitalcv"
+    namespace = "com.nexthorizonapps.digitalcv"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         // Unique Application ID for Google Play Store
-        applicationId = "com.waelmomani.digitalcv"
+        applicationId = "com.nexthorizonapps.digitalcv"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

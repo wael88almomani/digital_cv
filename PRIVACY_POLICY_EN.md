@@ -236,4 +236,6 @@ Digital CV is committed to:
 
 ---
 
-**For the most current version, visit:** https://github.com/wael88almomani/digital_cv
+**For the most current version,
+ Next Horizon Intelligent Apps Studio
+ harrpesadextonnes@gmail.com

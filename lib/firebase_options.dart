@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDksA9WjK7f_N2iuyTqOd-kjVvV1RMd-3w',
-    appId: '1:66446842106:android:038e6c11b9a1a2509dd143',
+    appId: '1:66446842106:android:27d939e3802fc8fb9dd143',
     messagingSenderId: '66446842106',
     projectId: 'digital-cv-e2a5c',
     storageBucket: 'digital-cv-e2a5c.firebasestorage.app',
