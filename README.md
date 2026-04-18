@@ -1,20 +1,24 @@
 # Digital CV
 
-Professional Digital CV Application
+> **Published by [Next Horizon Intelligent Apps Studio](mailto:harrpesadextonnes@gmail.com)**  
+> Version 1.0.0+1 · Flutter · Android & iOS
+
+---
 
 ## About the App
 
-Digital CV is a Flutter application that allows users to create and manage professional CVs in both Arabic and English. Users can export their CVs as modern, stylish PDF files with full support for Arabic (RTL) layout. The app supports multiple CVs per user, with a unique profile photo for each CV.
+**Digital CV** is a professional, privacy-first resume builder developed by **Next Horizon Intelligent Apps Studio**. It allows users to create and manage polished CVs in both Arabic and English, export them as high-quality PDFs, and securely store them in the cloud via Firebase. The app supports multiple CVs per user, each with its own profile photo, and features full RTL support for Arabic.
 
 ## Main Features
-- Create multiple CVs for each user
-- Support for Arabic and English languages
-- Export CVs to PDF with modern, professional design
-- Full RTL (right-to-left) support for Arabic
-- Separate profile photo for each CV
-- Add achievements, courses, certifications, skills, experience, education, references, hobbies
-- Fast and user-friendly interface
-- Local data storage with optional Firebase integration
+
+- Create and manage **multiple CVs** per user
+- Full **Arabic & English** language support with RTL layout
+- Export CVs to **PDF** with modern and classic professional designs
+- Unique **profile photo** per CV
+- Add achievements, courses, certifications, skills, experience, education, references, and hobbies
+- **Google Sign-In** and email/password authentication
+- Secure cloud sync via **Firebase Firestore**
+- **Privacy-first** — local data controlled by the user
 
 ## App Screens
 
@@ -365,11 +369,17 @@ users/
 ## Installation & Setup
 
 ### Prerequisites
-- Flutter SDK 3.10.8 or higher
+- Flutter SDK **3.10.8** or higher
 - Dart SDK
-- Android Studio or Xcode (for mobile development)
+- Android Studio / Xcode (for mobile builds)
 
+### Steps
 
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/wael88almomani/digital_cv.git
+   cd digital_cv
+   ```
 
 2. **Install Flutter dependencies**
    ```bash
@@ -377,9 +387,8 @@ users/
    ```
 
 3. **Configure Firebase**
-   - Set up Firebase project
-   - Download google-services.json (Android)
-   - Add to `android/app/`
+   - Set up a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+   - Download `google-services.json` (Android) and add it to `android/app/`
 
 4. **Run the app**
    ```bash
@@ -438,16 +447,19 @@ users/
 
 ---
 
-## Developer Information
+## Publisher Information
 
-- **Name:** Next Horizon Intelligent Apps Studio
-- **Email:** harrpesadextonnes@gmail.com
+| | |
+|---|---|
+| **Studio** | Next Horizon Intelligent Apps Studio |
+| **Contact** | [harrpesadextonnes@gmail.com](mailto:harrpesadextonnes@gmail.com) |
+| **Privacy Policy** | See `PRIVACY_POLICY_EN.md` / `PRIVACY_POLICY_EN.html` |
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See LICENSE file for details.
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
 
 ---
 
@@ -467,12 +479,12 @@ This project is licensed under the MIT License. See LICENSE file for details.
 ## Contributing
 
 Contributions are welcome! Please follow:
-1. Create a feature branch
-2. Make your changes
-3. Submit a pull request
-4. Include description of changes
+1. Fork the repository and create a feature branch
+2. Make your changes with clear commit messages
+3. Submit a pull request with a description of your changes
 
 ---
 
-**Last Updated:** March 6, 2026
-**App Version:** 1.0.0+1
+**Last Updated:** April 18, 2026  
+**App Version:** 1.0.0+1  
+**Publisher:** Next Horizon Intelligent Apps Studio
