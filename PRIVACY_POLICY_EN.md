@@ -182,7 +182,9 @@ We may update this policy periodically. You will be notified of significant chan
 
 For questions about this Privacy Policy:
 
-**Email:** wael88almomani@gmail.com
+**Publisher:** Next Horizon Intelligent Apps Studio
+
+**Email:** harrpesadextonnes@gmail.com
 
 **Response Time:** Within 7 business days
 
@@ -236,6 +238,7 @@ Digital CV is committed to:
 
 ---
 
-**For the most current version,
- Next Horizon Intelligent Apps Studio
- harrpesadextonnes@gmail.com
+**For the most current version of this policy, please contact us directly.**
+
+**Next Horizon Intelligent Apps Studio**
+harrpesadextonnes@gmail.com
