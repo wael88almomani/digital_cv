@@ -4,9 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
-  AuthService(this._auth, {GoogleSignIn? googleSignIn, FirebaseFirestore? firestore})
-    : _googleSignIn = googleSignIn ?? GoogleSignIn(),
-      _firestore = firestore ?? FirebaseFirestore.instance;
+  AuthService(
+    this._auth, {
+    GoogleSignIn? googleSignIn,
+    FirebaseFirestore? firestore,
+  }) : _googleSignIn = googleSignIn ?? GoogleSignIn(),
+       _firestore = firestore ?? FirebaseFirestore.instance;
 
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;

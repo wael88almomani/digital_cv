@@ -162,7 +162,8 @@ class AppLocalizations {
           'This will permanently delete your account, all CVs, and all associated data. This action cannot be undone.',
       'deleteAccountConfirm': 'Delete Account',
       'deleteAccountSuccess': 'Account deleted successfully.',
-      'deleteAccountFailed': 'Failed to delete account. Please sign in again and try.',
+      'deleteAccountFailed':
+          'Failed to delete account. Please sign in again and try.',
       'dangerZone': 'Danger Zone',
     },
     'ar': {
@@ -301,7 +302,8 @@ class AppLocalizations {
           'سيتم حذف حسابك وجميع سيراتك الذاتية وبياناتك بشكل دائم. لا يمكن التراجع عن هذا الإجراء.',
       'deleteAccountConfirm': 'حذف الحساب',
       'deleteAccountSuccess': 'تم حذف الحساب بنجاح.',
-      'deleteAccountFailed': 'فشل حذف الحساب. سجّل الدخول مجدداً وحاول مرة أخرى.',
+      'deleteAccountFailed':
+          'فشل حذف الحساب. سجّل الدخول مجدداً وحاول مرة أخرى.',
       'dangerZone': 'منطقة الخطر',
     },
   };

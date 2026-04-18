@@ -39,9 +39,9 @@ class SettingsScreen extends StatelessWidget {
     try {
       await auth.deleteAccount();
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l.t('deleteAccountSuccess'))),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l.t('deleteAccountSuccess'))));
       }
     } catch (_) {
       if (context.mounted) {
@@ -160,37 +160,41 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.warning_amber_rounded,
-                              color: Colors.red, size: 18),
+                          const Icon(
+                            Icons.warning_amber_rounded,
+                            color: Colors.red,
+                            size: 18,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             l.t('dangerZone'),
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(color: Colors.red),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleSmall?.copyWith(color: Colors.red),
                           ),
                         ],
                       ),
                       const SizedBox(height: AppSizes.spacingSm),
                       ListTile(
                         contentPadding: EdgeInsets.zero,
-                        leading: const Icon(Icons.delete_forever_outlined,
-                            color: Colors.red),
-                        title: Text(l.t('deleteAccount'),
-                            style: const TextStyle(color: Colors.red)),
-                        subtitle: Text(l.t('deleteAccountSubtitle'),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurface
-                                      .withValues(alpha: 0.6),
-                                )),
-                        onTap: () =>
-                            _confirmDeleteAccount(context, l, auth),
+                        leading: const Icon(
+                          Icons.delete_forever_outlined,
+                          color: Colors.red,
+                        ),
+                        title: Text(
+                          l.t('deleteAccount'),
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                        subtitle: Text(
+                          l.t('deleteAccountSubtitle'),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.6),
+                              ),
+                        ),
+                        onTap: () => _confirmDeleteAccount(context, l, auth),
                       ),
                     ],
                   ),
