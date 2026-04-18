@@ -20,7 +20,9 @@ class AppLocalizations {
 
   String t(String key) {
     final lang = locale.languageCode;
-    return _localizedValues[lang]?[key] ?? _localizedValues['en']![key]!;
+    return _localizedValues[lang]?[key] ??
+        _localizedValues['en']?[key] ??
+        key;
   }
 
   static const Map<String, Map<String, String>> _localizedValues = {

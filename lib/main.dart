@@ -109,7 +109,8 @@ class _AuthGateState extends State<AuthGate> {
           }
         }
 
-        _forcedSignOut = false;
+        // Guard: keep showing LoginScreen while forced sign-out is in flight
+        if (_forcedSignOut) return const LoginScreen();
         return snapshot.hasData ? const MainScreen() : const LoginScreen();
       },
     );
