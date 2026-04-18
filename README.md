@@ -19,7 +19,7 @@
 - **Google Sign-In** and email/password authentication
 - Secure cloud sync via **Firebase Firestore**
 - **Privacy-first** — local data controlled by the user
-- **Delete account** — permanently remove account and all associated data
+- **Delete account** — schedule account deletion with a 90-day grace period (cancellable anytime)
 
 ## App Screens
 
@@ -51,7 +51,7 @@
 ### 6. Settings Screen
 - View account information
 - Theme preferences
-- **Delete Account** — permanently deletes the account, all CVs, and all cloud data with a confirmation dialog
+- **Delete Account** — schedules permanent deletion after a 90-day grace period; user can cancel by signing back in before the deadline
 
 ## How to Run
 
@@ -375,7 +375,9 @@ users/
 2. Scroll to the **Danger Zone** section
 3. Tap **Delete Account**
 4. Confirm the action in the dialog
-5. All CVs and account data will be permanently deleted from the cloud
+5. Your account is **scheduled for deletion after 90 days** — you will be signed out
+6. **To cancel:** Sign back in before the 90-day deadline → tap **Keep My Account** in the dialog
+7. If the 90 days have passed, the account and all data are permanently deleted on next sign-in
 
 ---
 

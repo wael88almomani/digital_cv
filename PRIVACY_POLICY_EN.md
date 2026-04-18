@@ -116,7 +116,7 @@ You have the right to:
 
 - **Access** - Request and download a copy of your data at any time
 - **Correction** - Edit your personal information directly in the app
-- **Deletion** - Delete your account and all associated data permanently
+- **Deletion** - Request account deletion from the Settings screen. A **90-day grace period** applies before permanent deletion. You may cancel the deletion at any time during this period by signing back in.
 - **Portability** - Obtain your data in a portable format
 - **Object** - Oppose processing of your data at any time
 - **Withdraw Consent** - Withdraw permission for data use anytime
@@ -129,12 +129,21 @@ You have the right to:
 
 | Data Type | Retention Period |
 |-----------|-----------------|
-| Active account data | Until account deletion |
-| Backups after deletion | 30 days maximum |
+| Active account data | Until account deletion request |
+| Grace period after deletion request | 90 days (cancellable) |
+| Data after grace period expires | Permanently deleted |
+| Backups after permanent deletion | 30 days maximum |
 | Access logs | 90 days |
 | Full backups | 180 days |
 
-After deletion, data cannot be recovered from any system (local or cloud).
+### Account Deletion Process
+
+1. User requests deletion from **Settings → Danger Zone → Delete Account**
+2. A 90-day grace period begins — account remains accessible for sign-in
+3. During the grace period, the user may **cancel the deletion** by signing back in and choosing "Keep My Account"
+4. After 90 days, all data (CVs, personal information, account credentials) is **permanently and irrecoverably deleted** from all systems
+
+After permanent deletion, data cannot be recovered from any system (local or cloud).
 
 ---
 
