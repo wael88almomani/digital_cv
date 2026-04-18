@@ -37,11 +37,14 @@ class SettingsScreen extends StatelessWidget {
     if (confirmed != true || !context.mounted) return;
 
     try {
-      await auth.deleteAccount();
+      await auth.requestAccountDeletion();
       if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(l.t('deleteAccountSuccess'))));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l.t('deleteAccountSuccess')),
+            duration: const Duration(seconds: 4),
+          ),
+        );
       }
     } catch (_) {
       if (context.mounted) {

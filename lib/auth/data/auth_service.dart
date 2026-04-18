@@ -66,17 +66,71 @@ class AuthService {
     return _auth.sendPasswordResetEmail(email: email);
   }
 
-  /// Permanently deletes the current user's account:
-  /// 1. Deletes all CVs where userId == uid from Firestore
-  /// 2. Deletes the user document from Firestore
-  /// 3. Deletes the Firebase Auth account
-  Future<void> deleteAccount() async {
+  // ── Soft-delete (90-day grace period) ──────────────────────────────────────
+
+  static const int _deletionGraceDays = 90;
+
+  /// Schedules account deletion after 90 days.
+  /// Stores [scheduledDeletionAt] in the user Firestore document, then signs out.
+  Future<void> requestAccountDeletion() async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    final deletionDate = DateTime.now().add(const Duration(days: _deletionGraceDays));
+
+    await _firestore.collection('users').doc(user.uid).set(
+      {
+        'scheduledDeletionAt': deletionDate.millisecondsSinceEpoch,
+        'deletionRequestedAt': DateTime.now().millisecondsSinceEpoch,
+      },
+      SetOptions(merge: true),
+    );
+
+    await _googleSignIn.signOut();
+    await _auth.signOut();
+  }
+
+  /// Cancels a pending deletion request.
+  Future<void> cancelAccountDeletion() async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    await _firestore.collection('users').doc(user.uid).update({
+      'scheduledDeletionAt': FieldValue.delete(),
+      'deletionRequestedAt': FieldValue.delete(),
+    });
+  }
+
+  /// Checks if the signed-in user has a pending deletion.
+  /// Returns the [DateTime] of scheduled deletion, or null if none.
+  Future<DateTime?> getPendingDeletionDate() async {
+    final user = _auth.currentUser;
+    if (user == null) return null;
+
+    final doc = await _firestore.collection('users').doc(user.uid).get();
+    final ts = doc.data()?['scheduledDeletionAt'];
+    if (ts == null) return null;
+    return DateTime.fromMillisecondsSinceEpoch(ts as int);
+  }
+
+  /// If the grace period has expired, permanently deletes the account.
+  /// Returns true if account was deleted, false if still within grace period.
+  Future<bool> processExpiredDeletion() async {
+    final deletionDate = await getPendingDeletionDate();
+    if (deletionDate == null) return false;
+    if (DateTime.now().isBefore(deletionDate)) return false;
+
+    // Grace period over — permanently delete
+    await _permanentlyDeleteAccount();
+    return true;
+  }
+
+  Future<void> _permanentlyDeleteAccount() async {
     final user = _auth.currentUser;
     if (user == null) return;
 
     final uid = user.uid;
 
-    // Delete all CVs belonging to this user
     final cvSnapshot = await _firestore
         .collection('cvs')
         .where('userId', isEqualTo: uid)
@@ -85,13 +139,14 @@ class AuthService {
       await doc.reference.delete();
     }
 
-    // Delete the user document
     await _firestore.collection('users').doc(uid).delete();
-
-    // Sign out Google session if applicable
     await _googleSignIn.signOut();
-
-    // Delete the Firebase Auth user (requires recent sign-in)
     await user.delete();
   }
+
+  /// Hard delete — immediate (kept for admin/internal use).
+  Future<void> deleteAccount() async {
+    await _permanentlyDeleteAccount();
+  }
 }
+

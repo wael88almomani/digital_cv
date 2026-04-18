@@ -64,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passwordController.text.trim(),
       );
       await _storeRememberMe();
+      if (mounted) await _checkPendingDeletion();
     } on FirebaseAuthException catch (error) {
       setState(() {
         _error = _mapEmailPasswordError(error);
@@ -78,6 +79,67 @@ class _LoginScreenState extends State<LoginScreen> {
           _loading = false;
         });
       }
+    }
+  }
+
+  Future<void> _checkPendingDeletion() async {
+    if (!mounted) return;
+    final auth = context.read<AuthService>();
+    final l = AppLocalizations.of(context);
+
+    // If deletion grace period has already expired — process it immediately
+    final expired = await auth.processExpiredDeletion();
+    if (expired) return; // account deleted, AuthGate will redirect to login
+
+    final deletionDate = await auth.getPendingDeletionDate();
+    if (deletionDate == null || !mounted) return;
+
+    final dateStr =
+        '${deletionDate.year}-${deletionDate.month.toString().padLeft(2, '0')}-${deletionDate.day.toString().padLeft(2, '0')}';
+    final body = l.t('pendingDeletionBody').replaceAll('{date}', dateStr);
+
+    final cancel = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: Text(l.t('pendingDeletionTitle')),
+        content: Text(body),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: Text(l.t('continueDeletion')),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l.t('cancelDeletion')),
+          ),
+        ],
+      ),
+    );
+
+    if (!mounted) return;
+    if (cancel == true) {
+      try {
+        await auth.cancelAccountDeletion();
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(l.t('cancelDeletionSuccess'))),
+          );
+        }
+      } catch (_) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(l.t('cancelDeletionFailed')),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } else {
+      // User chose to continue deletion — sign out again
+      await auth.signOut();
     }
   }
 
@@ -96,6 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
       await _storeRememberMe();
+      if (mounted) await _checkPendingDeletion();
     } on FirebaseAuthException catch (error) {
       setState(() {
         _error = _mapGoogleError(error);

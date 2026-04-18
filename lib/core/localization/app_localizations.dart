@@ -156,15 +156,22 @@ class AppLocalizations {
       'tapToActivate': 'Tap to activate',
       'create': 'Create',
       'deleteAccount': 'Delete Account',
-      'deleteAccountSubtitle': 'Permanently delete your account and all data',
-      'deleteAccountConfirmTitle': 'Delete Account?',
+      'deleteAccountSubtitle': 'Schedule account deletion after a 90-day grace period',
+      'deleteAccountConfirmTitle': 'Schedule Account Deletion?',
       'deleteAccountConfirmBody':
-          'This will permanently delete your account, all CVs, and all associated data. This action cannot be undone.',
-      'deleteAccountConfirm': 'Delete Account',
-      'deleteAccountSuccess': 'Account deleted successfully.',
+          'Your account will be permanently deleted after 90 days. You can cancel this at any time before then by signing back in.',
+      'deleteAccountConfirm': 'Schedule Deletion',
+      'deleteAccountSuccess': 'Account scheduled for deletion in 90 days. You have been signed out.',
       'deleteAccountFailed':
-          'Failed to delete account. Please sign in again and try.',
+          'Failed to schedule deletion. Please try again.',
       'dangerZone': 'Danger Zone',
+      'pendingDeletionTitle': 'Account Scheduled for Deletion',
+      'pendingDeletionBody':
+          'Your account is scheduled to be permanently deleted on {date}. Would you like to cancel this and keep your account?',
+      'cancelDeletion': 'Keep My Account',
+      'continueDeletion': 'Continue Deletion',
+      'cancelDeletionSuccess': 'Account deletion cancelled. Welcome back!',
+      'cancelDeletionFailed': 'Failed to cancel deletion. Please try again.',
     },
     'ar': {
       'welcomeBack': 'اهلا بعودتك',
@@ -296,15 +303,22 @@ class AppLocalizations {
       'tapToActivate': 'اضغط للتفعيل',
       'create': 'إنشاء',
       'deleteAccount': 'حذف الحساب',
-      'deleteAccountSubtitle': 'حذف حسابك وجميع بياناتك بشكل دائم',
-      'deleteAccountConfirmTitle': 'حذف الحساب؟',
+      'deleteAccountSubtitle': 'جدولة حذف الحساب بعد فترة سماح 90 يوماً',
+      'deleteAccountConfirmTitle': 'جدولة حذف الحساب؟',
       'deleteAccountConfirmBody':
-          'سيتم حذف حسابك وجميع سيراتك الذاتية وبياناتك بشكل دائم. لا يمكن التراجع عن هذا الإجراء.',
-      'deleteAccountConfirm': 'حذف الحساب',
-      'deleteAccountSuccess': 'تم حذف الحساب بنجاح.',
+          'سيتم حذف حسابك نهائياً بعد 90 يوماً. يمكنك إلغاء ذلك في أي وقت قبل انتهاء المهلة بتسجيل الدخول مجدداً.',
+      'deleteAccountConfirm': 'جدولة الحذف',
+      'deleteAccountSuccess': 'تمت جدولة حذف الحساب بعد 90 يوماً. تم تسجيل خروجك.',
       'deleteAccountFailed':
-          'فشل حذف الحساب. سجّل الدخول مجدداً وحاول مرة أخرى.',
+          'فشل جدولة الحذف. حاول مرة أخرى.',
       'dangerZone': 'منطقة الخطر',
+      'pendingDeletionTitle': 'الحساب مجدوَل للحذف',
+      'pendingDeletionBody':
+          'حسابك مجدوَل للحذف النهائي بتاريخ {date}. هل تريد إلغاء ذلك والإبقاء على حسابك؟',
+      'cancelDeletion': 'الإبقاء على حسابي',
+      'continueDeletion': 'متابعة الحذف',
+      'cancelDeletionSuccess': 'تم إلغاء الحذف. أهلاً بعودتك!',
+      'cancelDeletionFailed': 'فشل إلغاء الحذف. حاول مرة أخرى.',
     },
   };
 }
